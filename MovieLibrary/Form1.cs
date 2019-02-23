@@ -18,6 +18,7 @@ namespace MovieLibrary
     public partial class Form1 : Form
     {
         static databaseManager db;
+
         public Form1()
         {
             InitializeComponent();
@@ -26,14 +27,21 @@ namespace MovieLibrary
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (movieTextBox.TextLength > 0)
+            if (movieTextBox.TextLength > 0) //Must be something in field
             {
-                if (db.addMovie(movieTextBox.Text))
+                if (!db.checkIfMovieExist(movieTextBox.Text))
                 {
-                    MessageBox.Show("Success");
+                    if (db.addMovie(movieTextBox.Text))
+                    {
+                        MessageBox.Show("Success");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failure");
+                    }
                 } else
                 {
-                    MessageBox.Show("Failure");
+                    MessageBox.Show("Movie already exists in database");
                 }
             }
             else
