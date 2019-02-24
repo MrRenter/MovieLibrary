@@ -48,6 +48,7 @@ namespace MovieLibrary
             try
             {
                 MySqlCommand check = new MySqlCommand("Select * from library.movies where name='" + movieName + "'", conn); //SQL injection here
+                MySqlDataReader reader;
 
                 conn.Open(); //maybe using?
                 reader = check.ExecuteReader();
